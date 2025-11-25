@@ -1,0 +1,60 @@
+[project]
+name = "ai-chat-console"
+version = "0.1.0"
+description = "Advanced AI console chat application with multi-provider support, tool calling, and MCP integration"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "anthropic>=0.72.0",
+    "openai>=1.50.0",
+    "python-dotenv>=1.2.1",
+    "pydantic>=2.9.0",
+    "click>=8.1.0",
+    "rich>=13.9.0",
+    "pyyaml>=6.0.2",
+    "httpx>=0.28.0",
+    "aiofiles>=24.1.0",
+    "asyncio-mqtt>=0.16.0",
+    "mcp>=0.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "black>=24.10.0",
+    "ruff>=0.7.0",
+    "mypy>=1.13.0",
+    "pre-commit>=4.0.0",
+]
+
+[project.scripts]
+ai-chat = "ai_chat_console.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.black]
+line-length = 88
+target-version = ['py313']
+
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+select = ["E", "F", "W", "I", "N", "B", "C90", "UP"]
+ignore = ["E501", "B008"]
+
+[tool.mypy]
+python_version = "3.13"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+asyncio_mode = "auto"

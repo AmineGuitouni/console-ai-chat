@@ -1,0 +1,86 @@
+# CLI Chat Application Configuration
+# Copy this file to config.yaml and update with your settings
+
+# Global log level (DEBUG, INFO, WARNING, ERROR)
+log_level: INFO
+
+# Theme for the console interface
+theme: default
+
+# Chat settings
+chat:
+  # Maximum number of messages to keep in conversation history
+  conversation_history_limit: 50
+
+  # Enable streaming responses from the AI model
+  enable_streaming: true
+
+  # Enable thinking mode for supported models
+  enable_thinking: true
+
+  # Enable tool usage for supported models
+  enable_tools: true
+
+  # System prompt to override the default behavior
+  # Set to null for default system prompt
+  system_prompt: null
+
+  # Provider configuration
+  provider:
+    # Provider type: 'anthropic', 'openai', 'openrouter'
+    type: anthropic
+
+    # Model name (depends on provider)
+    # Anthropic: claude-3-sonnet-20240229, claude-3-haiku-20240307, etc.
+    # OpenAI: gpt-4, gpt-3.5-turbo, etc.
+    # OpenRouter: various models available on the platform
+    model: glm-4.6
+
+    # API key for the provider
+    # IMPORTANT: Keep this secure and never share it
+    api_key: 'your-api-key-here'
+
+    # Base URL for API calls (optional, for custom endpoints)
+    # For Anthropic: https://api.anthropic.com
+    # For OpenAI: https://api.openai.com
+    # For OpenRouter: https://openrouter.ai/api/v1
+    # For custom/local providers: your endpoint URL
+    base_url: https://api.anthropic.com
+
+    # Maximum tokens for model response
+    max_tokens: 64000
+
+    # Temperature for response generation (0.0 to 1.0)
+    temperature: 0.2
+
+    # Model capabilities (set based on your chosen model)
+    supports_streaming: true
+    supports_thinking: true
+    supports_tools: true
+
+# Model Context Protocol (MCP) configuration
+mcp:
+  servers:
+    # Example MCP server configuration
+    - name: example-server
+      url: https://example-mcp-server.com/mcp
+      headers:
+        # Optional headers for authentication
+        # Authorization: "Bearer your-token"
+        # X-API-Key: "your-api-key"
+
+    # Add more MCP servers as needed
+    # - name: another-server
+    #   url: https://another-server.com/mcp
+    #   headers:
+    #     X-Custom-Header: "value"
+
+# Tool configuration
+tools:
+  # Enable built-in tools (calculator, datetime, etc.)
+  enable_builtin: false
+
+  # Additional directories to load custom tools from
+  directories:
+    # - "./custom_tools"
+    # - "~/.local/share/ai-chat-console/tools"
