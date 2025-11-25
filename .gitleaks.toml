@@ -13,7 +13,7 @@ tags = ["key", "anthropic"]
 [[rules]]
 id = "openai-api-key"
 description = "OpenAI API Key"
-regex = '''sk-[a-zA-Z0-9]{48,}'''
+regex = '''sk-proj-[a-zA-Z0-9]{48,}|sk-[a-zA-Z0-9]{48}'''
 tags = ["key", "openai"]
 
 [[rules]]

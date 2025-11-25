@@ -13,6 +13,8 @@ jobs:
   secret-scanning:
     name: Secret Scanning with Gitleaks
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -28,6 +30,9 @@ jobs:
   dependency-review:
     name: Dependency Review
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     if: github.event_name == 'pull_request'
     steps:
       - name: Checkout code
