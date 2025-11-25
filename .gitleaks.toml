@@ -1,0 +1,61 @@
+# Gitleaks configuration for console-ai-chat
+# This file customizes secret detection rules
+
+title = "Gitleaks Config for AI Chat Console"
+
+# Extend the default rules with custom patterns
+[[rules]]
+id = "anthropic-api-key"
+description = "Anthropic API Key"
+regex = '''sk-ant-[a-zA-Z0-9\-_]{95,}'''
+tags = ["key", "anthropic"]
+
+[[rules]]
+id = "openai-api-key"
+description = "OpenAI API Key"
+regex = '''sk-proj-[a-zA-Z0-9]{48,}|sk-[a-zA-Z0-9]{48}'''
+tags = ["key", "openai"]
+
+[[rules]]
+id = "generic-api-key"
+description = "Generic API Key"
+regex = '''(?i)api[_-]?key['\"]?\s*[:=]\s*['\"]([a-zA-Z0-9\-_]{32,})['\"]'''
+tags = ["key", "generic"]
+
+[[rules]]
+id = "bearer-token"
+description = "Bearer Token"
+regex = '''Bearer\s+[a-zA-Z0-9\-._~+/]+=*'''
+tags = ["key", "bearer"]
+
+[[rules]]
+id = "jwt-token"
+description = "JSON Web Token"
+regex = '''eyJ[A-Za-z0-9-_=]+\.eyJ[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*'''
+tags = ["key", "jwt"]
+
+# Allowlist for false positives
+[allowlist]
+description = "Allowlisted files and patterns"
+paths = [
+    '''config\.example\.yaml''',
+    '''.*_test\.py''',
+    '''.*\.md''',
+]
+
+regexes = [
+    '''your-api-key-here''',
+    '''your-token-here''',
+    '''example-.*''',
+    '''test-.*''',
+    '''dummy-.*''',
+    '''fake-.*''',
+]
+
+# Stop scanning at these paths
+stopwords = [
+    "your-api-key-here",
+    "your-token-here",
+    "example-key",
+    "test-key",
+]
